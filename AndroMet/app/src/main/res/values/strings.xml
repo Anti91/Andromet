@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AndroMet</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="title_activity_current_data">Pillanatnyi adatok</string>
+    <string name="title_activity_temp_map">Hőmérséklet térkép</string>
+    <string name="appwidget_text">AndroMet Widget</string>
+    <string name="add_widget">Widget hozzáadása</string>
+    <string name="title_activity_forecast">Előrejelzés</string>
+
+</resources>

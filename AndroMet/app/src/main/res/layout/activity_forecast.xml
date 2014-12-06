@@ -1,0 +1,370 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fc_date"
+        android:padding="10dip"
+        android:text="Előrejelzés:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp" />
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinner"
+                android:layout_alignParentRight="true"
+                android:stretchColumns="*"
+                android:background="#000000"
+                android:padding="5dip">
+
+                <TableRow android:background="#dadae3" android:layout_margin="2dp">
+                    <TextView
+                        android:id="@+id/textViewHely"
+                        android:padding="10dip"
+                        android:text="Északnyugat-Magyarország"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"  />
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Időjárás:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_sign1"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:layout_gravity="left"
+                        android:padding="8dip" />
+
+
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Hőmérséklet:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_minmax1"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:layout_gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Szél:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip"  />
+                    <TextView
+                        android:id="@+id/fc_wind1"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:layout_gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinner"
+                android:layout_alignParentRight="true"
+                android:stretchColumns="*"
+                android:background="#000000"
+                android:padding="5dip">
+
+                <TableRow android:background="#dadae3" android:layout_margin="2dp">
+                    <TextView
+                        android:id="@+id/textViewHely1"
+                        android:padding="10dip"
+                        android:text="Közép-Magyarország"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"  />
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Időjárás:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_sign2"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:layout_gravity="left"
+                        android:padding="8dip" />
+
+
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Hőmérséklet:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_minmax2"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:layout_gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Szél:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip"  />
+                    <TextView
+                        android:id="@+id/fc_wind2"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:layout_gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+            </TableLayout>
+
+
+
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinner"
+                android:layout_alignParentRight="true"
+                android:stretchColumns="*"
+                android:background="#000000"
+                android:padding="5dip">
+
+                <TableRow android:background="#dadae3" android:layout_margin="2dp">
+                    <TextView
+                        android:id="@+id/textViewHely2"
+                        android:padding="10dip"
+                        android:text="Északkelet-Magyarország"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"  />
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Időjárás:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_sign3"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:padding="8dip" />
+
+
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Hőmérséklet:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_minmax3"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Szél:"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip"  />
+                    <TextView
+                        android:id="@+id/fc_wind3"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+            </TableLayout>
+
+
+
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinner"
+                android:layout_alignParentRight="true"
+                android:stretchColumns="*"
+                android:background="#000000"
+                android:padding="5dip">
+
+                <TableRow android:background="#dadae3" android:layout_margin="2dp">
+                    <TextView
+                        android:id="@+id/textViewHely3"
+                        android:padding="10dip"
+                        android:text="Délnyugat-Magyarország"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"  />
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Időjárás:"
+                        android:layout_width="wrap_content"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_sign4"
+                        android:text=""
+                        android:layout_width="150dp"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:padding="8dip" />
+
+
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Hőmérséklet:"
+                        android:layout_width="wrap_content"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_minmax4"
+                        android:text=""
+                        android:layout_width="match_parent"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Szél:"
+                        android:layout_width="wrap_content"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip"  />
+                    <TextView
+                        android:id="@+id/fc_wind4"
+                        android:text=""
+                        android:layout_width="match_parent"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+            </TableLayout>
+
+
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinner"
+                android:layout_alignParentRight="true"
+                android:stretchColumns="*"
+                android:background="#000000"
+                android:padding="5dip">
+
+                <TableRow android:background="#dadae3" android:layout_margin="2dp">
+                    <TextView
+                        android:id="@+id/textViewHely4"
+                        android:padding="10dip"
+                        android:text="Délkelet-Magyarország"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"  />
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Időjárás:"
+                        android:layout_width="wrap_content"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_sign5"
+                        android:text=""
+                        android:layout_width="150dp"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:padding="8dip" />
+
+
+                </TableRow>
+
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Hőmérséklet:"
+                        android:layout_width="wrap_content"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip" />
+                    <TextView
+                        android:id="@+id/fc_minmax5"
+                        android:text=""
+                        android:layout_width="match_parent"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+                <TableRow android:background="#eeeeee" android:layout_margin="2dp">
+                    <TextView
+                        android:text="Szél:"
+                        android:layout_width="wrap_content"
+                        android:background="#d7c797"
+                        android:gravity="right"
+                        android:padding="8dip"  />
+                    <TextView
+                        android:id="@+id/fc_wind5"
+                        android:text=""
+                        android:layout_width="match_parent"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:padding="8dip"  />
+                </TableRow>
+            </TableLayout>
+            <TextView
+                android:id="@+id/fc_progno"
+                android:padding="10dip"
+                android:text="-"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="fill"  />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
