@@ -1,6 +1,7 @@
 package hu.uniobuda.nik.andromet;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
@@ -28,12 +29,15 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 public class UpdateService extends Service {
+
+
     public UpdateService() {
     }
 
@@ -47,18 +51,8 @@ public class UpdateService extends Service {
 
     private void buildUpdate()
     {
-        /*String lastUpdated = DateFormat.format("hh:mm:ss", new Date()).toString();
 
-        RemoteViews view = new RemoteViews(getPackageName(), R.layout.andro_met_widget);
-        view.setTextViewText(R.id.LocTime, lastUpdated);
-
-
-
-        ComponentName thisWidget = new ComponentName(this, AndroMetWidget.class);
-        AppWidgetManager manager = AppWidgetManager.getInstance(this);
-        manager.updateAppWidget(thisWidget, view);*/
-
-        new Retrievedata().execute(this);
+        new Retrievedata().execute(this); // adatok frissítése a widgeten másik szálon
 
     }
 
@@ -71,12 +65,15 @@ public class UpdateService extends Service {
 
 
 
-    class Retrievedata extends AsyncTask<Context, Void, Integer> {
+    class Retrievedata extends AsyncTask<Context, Void, Context> {
+
+        HttpResponse response;
+        String result;
+
         @Override
-        protected Integer doInBackground(Context... params) {
+        protected Context doInBackground(Context... params) {
             // Create a new HttpClient and Post Header
-            HttpResponse response;
-            String result;
+
 
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://www.amsz.hu/android.php");
@@ -90,15 +87,6 @@ public class UpdateService extends Service {
                 response = httpclient.execute(httppost);
                 if (response.getStatusLine().getStatusCode() == 200) {
                     result = EntityUtils.toString(response.getEntity(), "iso-8859-2");
-
-                    RemoteViews view = new RemoteViews(getPackageName(), R.layout.andro_met_widget);
-                    view.setTextViewText(R.id.LocTime, result);
-
-
-
-                    ComponentName thisWidget = new ComponentName(params[0], AndroMetWidget.class);
-                    AppWidgetManager manager = AppWidgetManager.getInstance(params[0]);
-                    manager.updateAppWidget(thisWidget, view);
                 }
 
 
@@ -108,11 +96,23 @@ public class UpdateService extends Service {
                 Toast.makeText(getApplicationContext(), "Váratlan hiba",Toast.LENGTH_LONG).show();
             }
 
-            return 1;
+            return params[0];
         }
         @Override
-        protected void onPostExecute(Integer h) {
+        protected void onPostExecute(Context h) {
 
+            if (result != "") {
+
+                String[] sp = result.split("#");
+
+                RemoteViews view = new RemoteViews(getPackageName(), R.layout.andro_met_widget);
+                view.setTextViewText(R.id.LocTime, sp[0]);
+                view.setTextViewText(R.id.CurrTemp, sp[1] + "°C");
+
+                ComponentName thisWidget = new ComponentName(h, AndroMetWidget.class);
+                AppWidgetManager manager = AppWidgetManager.getInstance(h);
+                manager.updateAppWidget(thisWidget, view);
+            }
 
         }
     }

@@ -1,6 +1,7 @@
 package hu.uniobuda.nik.andromet;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,6 +30,8 @@ import java.util.List;
 
 public class Forecast extends Activity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,7 @@ public class Forecast extends Activity {
 
         HttpResponse response;
         String result = "";
+        ProgressDialog dialog;
 
         @Override
         protected Integer doInBackground(Void... params) {
@@ -78,6 +82,15 @@ public class Forecast extends Activity {
             }
 
             return 1;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(Forecast.this);
+            dialog.setMessage("Betöltés");
+            dialog.setCancelable(false);
+            dialog.setInverseBackgroundForced(false);
+            dialog.show();
         }
 
         @Override
@@ -114,6 +127,10 @@ public class Forecast extends Activity {
             catch (Exception ex)
             {
                 Toast.makeText(getApplicationContext(), "Hiba a feldolgozás során!",Toast.LENGTH_LONG).show();
+            }
+            finally {
+                dialog.hide();
+                dialog.dismiss();
             }
 
         }

@@ -1,6 +1,7 @@
 package hu.uniobuda.nik.andromet;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class CurrentData extends Activity {
     ImageView img1;
     ImageView img2;
     ImageView img3;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,6 @@ public class CurrentData extends Activity {
         img1 = (ImageView) findViewById(R.id.imageView1);
         img2 = (ImageView) findViewById(R.id.imageView2);
         img3 = (ImageView) findViewById(R.id.imageView3);
-
 
        stations = new ArrayList<station>();
        spinner = (Spinner) findViewById(R.id.spinner);
@@ -150,6 +151,15 @@ public class CurrentData extends Activity {
            return 1;
         }
 
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(CurrentData.this);
+            dialog.setMessage("Betöltés");
+            dialog.setCancelable(false);
+            dialog.setInverseBackgroundForced(false);
+            dialog.show();
+        }
+
         // Feldolgozás
         @Override
         protected void onPostExecute(Integer h) {
@@ -184,9 +194,14 @@ public class CurrentData extends Activity {
                     textview3.setText(sp[2] + " hPa");
 
                 }
+
             } catch (Exception ex)
             {
                 Toast.makeText(getApplicationContext(), "Hiba a feldolgozás során!", Toast.LENGTH_LONG).show();
+            }
+            finally {
+                dialog.hide();
+                dialog.dismiss();
             }
         }
     }

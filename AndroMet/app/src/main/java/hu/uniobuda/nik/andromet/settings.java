@@ -1,7 +1,11 @@
 package hu.uniobuda.nik.andromet;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -18,6 +22,7 @@ import android.preference.RingtonePreference;
 import android.text.TextUtils;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -39,13 +44,18 @@ public class settings extends PreferenceActivity {
      * shown on tablets.
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
+    private static Context baseContext;
+    private static PendingIntent service = null;
 
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
+        baseContext = getBaseContext();
+
         setupSimplePreferencesScreen();
+
     }
 
     /**
@@ -135,6 +145,31 @@ public class settings extends PreferenceActivity {
             String stringValue = value.toString();
 
             if (preference instanceof ListPreference) {
+
+
+                // Service intervallum módosítása
+                final AlarmManager m = (AlarmManager) baseContext.getSystemService(Context.ALARM_SERVICE);
+
+                final Calendar TIME = Calendar.getInstance();
+                TIME.set(Calendar.MINUTE, 0);
+                TIME.set(Calendar.SECOND, 0);
+                TIME.set(Calendar.MILLISECOND, 0);
+
+                final Intent i = new Intent(baseContext, UpdateService.class);
+
+                if (service == null) {
+                    service = PendingIntent.getService(baseContext, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
+                }
+
+                int freq = Integer.parseInt(stringValue);
+                int minute = 60000;
+
+                if (freq > 0)
+                    m.setRepeating(AlarmManager.RTC, TIME.getTime().getTime(), minute * freq, service);
+                else if (service != null)
+                    m.cancel(service);
+
+
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
                 ListPreference listPreference = (ListPreference) preference;

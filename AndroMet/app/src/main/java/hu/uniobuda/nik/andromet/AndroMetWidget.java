@@ -13,6 +13,7 @@ import android.os.SystemClock;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +24,7 @@ import java.util.Date;
  */
 public class AndroMetWidget extends AppWidgetProvider {
 
-    private static PendingIntent service = null;
+    private PendingIntent service = null;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -45,46 +46,26 @@ public class AndroMetWidget extends AppWidgetProvider {
 
         }*/
 
-        final AlarmManager m = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        final Calendar TIME = Calendar.getInstance();
-        TIME.set(Calendar.MINUTE, 0);
-        TIME.set(Calendar.SECOND, 0);
-        TIME.set(Calendar.MILLISECOND, 0);
-
-        final Intent i = new Intent(context, UpdateService.class);
-        PendingIntent service = null;
-
-        if (service == null) {
-            service = PendingIntent.getService(context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
-        }
-
-        SharedPreferences preferences = context.getSharedPreferences("hu.uniobuda.nik.andromet_preferences", Context.MODE_PRIVATE);
-        int freq = Integer.parseInt(preferences.getString("sync_frequency", null));
-
-        if (freq > 0)
-            m.setRepeating(AlarmManager.RTC, TIME.getTime().getTime(), 60000 * freq, service);
-        else if (service != null)
-            m.cancel(service);
-
+        // ha rákattintunk, akkor a beállítások activity előjön
         ComponentName thisWidget = new ComponentName(context, AndroMetWidget.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
         for (int widgetId : allWidgetIds) {
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.andro_met_widget);
             Intent configIntent = new Intent(context, settings.class);
-
             PendingIntent configPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0);
-
-            remoteViews.setOnClickPendingIntent(R.id.WeatherIcon, configPendingIntent);
-
+            remoteViews.setOnClickPendingIntent(R.id.widget, configPendingIntent);
             appWidgetManager.updateAppWidget(widgetId, remoteViews);
         }
 
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
+    public void onEnabled(Context context) {
+        super.onEnabled(context);
+
+
+
     }
 
     @Override

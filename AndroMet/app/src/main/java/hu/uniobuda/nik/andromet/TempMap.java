@@ -1,5 +1,6 @@
 package hu.uniobuda.nik.andromet;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,6 +8,7 @@ import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +37,7 @@ public class TempMap extends FragmentActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     HttpResponse response;
     String result;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,11 +99,30 @@ public class TempMap extends FragmentActivity {
         }
 
         @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(TempMap.this);
+            dialog.setMessage("Betöltés");
+            dialog.setCancelable(false);
+            dialog.setInverseBackgroundForced(false);
+            dialog.show();
+        }
+
+        @Override
         protected void onPostExecute(Integer h) {
-            String[] sp = result.split("#");
-            for (int i = 0; i < sp.length; i++) {
-                String[] sp2 = sp[i].split(";");
+            try {
+                String[] sp = result.split("#");
+                for (int i = 0; i < sp.length; i++) {
+                    String[] sp2 = sp[i].split(";");
                     setUpMap(Float.parseFloat(sp2[2]), Float.parseFloat(sp2[1]), Float.parseFloat(sp2[0]));
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.makeText(getApplicationContext(), "Hiba a betöltés során!", Toast.LENGTH_LONG).show();
+            }
+            finally {
+                dialog.hide();
+                dialog.dismiss();
             }
         }
     }
